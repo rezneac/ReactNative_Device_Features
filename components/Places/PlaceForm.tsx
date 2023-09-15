@@ -5,8 +5,13 @@ import ImagePicker from './ImagePicker';
 import LocationPicker from './LocationPicker';
 import Button from '../UI/Button';
 import {getAddress} from '../../util/location';
+import {Place} from '../../models/place';
 
-const PlaceForm = () => {
+interface IProps {
+  onCreatePlace: (place: Place) => void;
+}
+
+const PlaceForm = ({onCreatePlace}: IProps) => {
   const [enteredTitle, setEnteredTitle] = useState('');
   const [selectedImage, setSelectedImage] = useState('');
   const [pickedLocation, setPickedLocation] = useState({});
@@ -24,9 +29,8 @@ const PlaceForm = () => {
   }, []);
 
   function savePlaceHandler() {
-    console.log(enteredTitle);
-    console.log(selectedImage);
-    console.log(pickedLocation);
+    const placeData = new Place(enteredTitle, selectedImage, pickedLocation);
+    onCreatePlace(placeData);
   }
 
   return (

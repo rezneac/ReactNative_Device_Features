@@ -19,11 +19,11 @@ const LocationPicker = ({onTakeLocation}: IProps) => {
   useEffect(() => {
     async function handleLocation() {
       if (pickedLocation) {
-        const address = getAddress(
+        const address = await getAddress(
           pickedLocation.longitude,
           pickedLocation.latitude,
         );
-        onTakeLocation({...pickedLocation, address: address});
+        await onTakeLocation({...pickedLocation, address: address});
       }
     }
 

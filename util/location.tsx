@@ -21,6 +21,6 @@ export async function getAddress(longitude: number, latitude: number) {
     return result;
   } catch (error) {
     console.error('Error:', error);
-    return error; 
+    return error;
   }
 }

@@ -22,7 +22,6 @@ const ImagePicker = ({onTakeImage}: IProps) => {
       {cameraType: 'back', mediaType: 'photo', quality: 0.5},
       response => {
         if (response.assets && response.assets.length > 0) {
-          console.log(response.assets[0].uri);
           setResolution({
             height: response.assets[0].height || 0,
             width: response.assets[0].width || 0,
