@@ -1,13 +1,21 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Button, Image, StyleSheet, Text} from 'react-native';
 import {View} from 'react-native';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {Colors} from '../constants/colors';
 import OutlinedButton from '../UI/OutlinedButton';
 
-const ImagePicker = () => {
+interface IProps {
+  onTakeImage: (imageUri: string) => void;
+}
+
+const ImagePicker = ({onTakeImage}: IProps) => {
   const [pickedImage, setPickedImage] = useState<any>();
   const [resolutin, setResolution] = useState({height: 0, width: 0});
+
+  useEffect(() => {
+    onTakeImage(pickedImage);
+  }, [pickedImage, onTakeImage]);
 
   async function takeImageHandler() {
     const image = await launchCamera(
@@ -54,6 +62,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: Colors.primary100,
     borderRadius: 4,
+    overflow: 'hidden',
   },
   image: {
     height: '100%',
